@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: combined-ingress
+spec:
+  rules:
+  - host: django.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: django-service
+            port:
+              number: {{ .Values.django.service.port }}
+  - host: angular.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: angular-service
+            port:
+              number: {{ .Values.angular.service.port }}

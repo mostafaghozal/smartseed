@@ -1,0 +1,17 @@
+django:
+  image:
+    repository: ghozal/django-app
+    tag: latest
+  service:
+    port: 8000
+    targetPort: 8000
+
+angular:
+  image:
+    repository: ghozal/angular-app
+    tag: latest
+  service:
+    port: 80
+    targetPort: 80
+
+# Other settings, such as environment variables, resources, etc.

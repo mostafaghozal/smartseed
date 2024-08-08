@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+      - name: django
+        image: "{{ .Values.django.image.repository }}:{{ .Values.django.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.django.service.port }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular
+  template:
+    metadata:
+      labels:
+        app: angular
+    spec:
+      containers:
+      - name: angular
+        image: "{{ .Values.angular.image.repository }}:{{ .Values.angular.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.angular.service.port }}
